@@ -1,53 +1,152 @@
-# 📋 Página de Cadastro de Usuário | User Registration Page
+# Sistema de Cadastro de Usuários
 
-Este projeto é uma aplicação web simples e responsiva para cadastro de novos usuários, com front-end em HTML, CSS e JavaScript puro (Vanilla JS), e back-end em Node.js com Express. Ideal para fins de estudo, protótipos ou como base para projetos maiores de front e back-end.
-
-This project is a simple and responsive web application for registering new users, built with HTML, CSS, Vanilla JavaScript, and a Node.js + Express backend. Perfect for learning purposes, prototyping, or as a base for larger applications.
+Este é um projeto completo de um sistema de cadastro de usuários utilizando **HTML, CSS, JavaScript (frontend)** e **Node.js com Express + MySQL (backend)**. A senha dos usuários é armazenada de forma segura utilizando hash com **bcryptjs**.
 
 ---
 
-## 🧱 Tecnologias | Technologies
+## 📁 Estrutura do Projeto
 
-### Front-end:
-- **HTML5**: Estrutura da página | Page structure  
-- **CSS3**: Estilização da interface | Interface styling  
-- **JavaScript (Vanilla)**: Validação e interações | Validation and user interaction  
+```
+📦 projeto/
 
-### Back-end:
-- **Node.js**: Ambiente de execução | Runtime environment  
-- **Express.js**: Framework para o servidor | Server framework  
-- **Fetch API**: Comunicação front → back | Front-end to back-end communication  
-
+├── db.js
+├── server.js
+├── .env
+└── package.json
+└── frontend/
+  ├── index.html
+  ├── style.css
+  └── script.js
+```
 ---
-
 ## 🎯 Funcionalidades | Features
 
-✅ Formulário com os campos:  
+-> Formulário com os campos: Nome, email e senha 
 - Nome | Name  
 - E-mail  
 - Senha | Password  
+-> Validação simples para garantir que todos os campos sejam preenchidos | Basic form validation  
+-> Exibição de mensagem de sucesso após o envio | Success message display  
+-> Reset automático do formulário | Auto-reset form after submission  
+-> Comunicação com back-end via `fetch` e rota POST `/cadastro` | Backend integration via POST `/cadastro`
+-> Envio dos dados via fetch() para o servidor Node.js
+-> Criptografia segura de senha com bcrypt
+-> Inserção dos dados no banco de dados MySQL
+---
 
-✅ Validação simples para garantir que todos os campos sejam preenchidos | Basic form validation  
-✅ Exibição de mensagem de sucesso após o envio | Success message display  
-✅ Reset automático do formulário | Auto-reset form after submission  
-✅ Comunicação com back-end via `fetch` e rota POST `/cadastro` | Backend integration via POST `/cadastro`
+## ⚙️ Pré-requisitos
+
+- Node.js e npm instalados
+- MySQL instalado
+- Editor de código (como VSCode)
+- Ferramenta para gerenciar banco (como DBeaver ou MySQL Workbench)
 
 ---
 
-## 🚀 Como rodar localmente | How to run locally
+## 🛠️ Instalação e Execução
 
-### 1. Clone o repositório | Clone the repository:
+### 1. Clonar o projeto
 ```bash
-git clone https://github.com/seu-usuario/seu-repositorio.git
-cd nome-da-pasta
+git clone https://github.com/seu-usuario/seu-repo.git
+cd projeto
 ```
-### 2. Instale as dependências do back-end | Install backend dependencies:
-```bash
-cd cadastro-backend
-npm install
 
+### 2. Criar o banco de dados no MySQL
+
+```sql
+CREATE DATABASE cadastro_usuarios;
+
+USE cadastro_usuarios;
+
+CREATE TABLE usuarios (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  nome VARCHAR(255) NOT NULL,
+  email VARCHAR(255) NOT NULL UNIQUE,
+  senha VARCHAR(255) NOT NULL
+);
+```
+
+---
+
+## 🚀 Backend (Node.js + Express)
+
+### 1. Acesse a pasta do backend
+
+```bash
+cd backend
+```
+
+### 2. Instale as dependências
+
+```bash
+npm install express mysql2 bcryptjs dotenv cors
+```
+
+### 3. Configure as variáveis de ambiente
+
+Crie um arquivo `.env` com as configurações do seu banco:
+
+```
+DB_HOST=localhost
+DB_USER=seu_usuario
+DB_PASSWORD=sua_senha
+DB_NAME=cadastro_usuarios
+```
+
+### 4. Inicie o servidor
+
+```bash
 node server.js
 ```
-## Próximos passos: conectar com banco de dados MySQL ou MongoDB.
 
+O servidor deve rodar em: [http://localhost:3000](http://localhost:3000)
 
+---
+
+## 💻 Frontend (HTML + CSS + JS)
+
+### 1. Acesse a pasta do frontend
+Abra o arquivo `index.html` no navegador.
+
+> Ele contém um formulário que envia os dados para o backend via `fetch()`.
+
+---
+
+## ✅ Testando o Projeto
+
+1. Preencha o formulário no navegador com nome, e-mail e senha.
+2. Clique em **Cadastrar**.
+3. Verifique se a mensagem de sucesso aparece.
+4. Consulte o banco de dados (via DBeaver ou terminal):
+
+```sql
+SELECT * FROM usuarios;
+```
+
+---
+
+## 🔒 Segurança
+
+- As senhas são armazenadas usando hash com `bcryptjs`.
+- A API utiliza `CORS` para permitir requisições do frontend.
+
+---
+
+## 🧠 Tecnologias Utilizadas
+
+- Frontend: HTML5, CSS3, JavaScript
+- Backend: Node.js, Express, bcryptjs, fetch API
+- Banco de Dados: MySQL
+- Ferramentas: dotenv, DBeaver, npm
+
+---
+
+## 📌 Autora
+
+Desenvolvido por **Juliana Sabioni**
+
+---
+
+## 📃 Licença
+
+Este projeto está sob a licença MIT.
