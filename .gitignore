@@ -1,0 +1,15 @@
+# Node.js
+node_modules/
+.env
+*.log
+
+# Sistemas Operacionais
+.DS_Store
+Thumbs.db
+
+# IDEs/editores
+.vscode/
+.idea/
+
+# Outros
+*.bak
